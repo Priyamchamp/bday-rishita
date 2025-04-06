@@ -5,7 +5,7 @@ type PhotoProps = {
   src: string;
   alt: string;
   className?: string;
-  animation?: 'zoom' | 'slide' | 'rotate';
+  animation?: 'zoom' | 'slide' | 'rotate' | 'fade';
 };
 
 const Photo = ({ src, alt, className, animation = 'zoom' }: PhotoProps) => {
@@ -13,6 +13,7 @@ const Photo = ({ src, alt, className, animation = 'zoom' }: PhotoProps) => {
     'zoom': 'animate-bounce-in',
     'slide': 'animate-slide-right',
     'rotate': 'animate-rotate-in',
+    'fade': 'animate-fade-in',
   }[animation];
 
   return (
