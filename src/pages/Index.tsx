@@ -1,13 +1,192 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import Page from "@/components/Page";
+import Photo from "@/components/Photo";
+import Message from "@/components/Message";
+import Navigation from "@/components/Navigation";
+import Fireworks from "@/components/Fireworks";
+
+// Sample photos - you can replace these with actual photos of the birthday person
+const photos = [
+  "/placeholder.svg",
+  "/placeholder.svg",
+  "/placeholder.svg",
+  "/placeholder.svg",
+];
+
+const messages = [
+  "To the Star of the Day!",
+  "You make every moment brighter",
+  "Here's to your amazing journey!",
+  "Happy Birthday! 🎂",
+];
+
+// Update the name of the birthday person here
+const birthdayPerson = "Sarah";
 
 const Index = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = 4;
+  
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  
+  // Optional: Auto-progress the pages
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (currentPage < totalPages - 1) {
+        setCurrentPage(p => p + 1);
+      }
+    }, 8000); // Change page every 8 seconds
+    
+    return () => clearTimeout(timer);
+  }, [currentPage]);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="relative overflow-hidden min-h-screen">
+      {/* Page 1: Opening */}
+      <Page 
+        id="page-1"
+        isActive={currentPage === 0}
+        hasSparkles={true}
+        className="bg-gradient-1"
+      >
+        <div className="flex flex-col items-center justify-center gap-8">
+          <Photo 
+            src={photos[0]} 
+            alt="Birthday person" 
+            className="w-64 h-64 md:w-96 md:h-96"
+            animation="zoom"
+          />
+          <Message 
+            text={messages[0]}
+            animation="fade"
+            delay={500}
+            className="text-primary font-bold"
+          />
+        </div>
+      </Page>
+      
+      {/* Page 2: Second slide */}
+      <Page 
+        id="page-2"
+        isActive={currentPage === 1}
+        hasConfetti={true}
+        className="bg-gradient-2"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+          <Photo 
+            src={photos[1]} 
+            alt="Birthday person" 
+            className="w-64 h-64"
+            animation="slide"
+          />
+          <Message 
+            text={messages[1]}
+            animation="typewriter"
+            className="text-secondary"
+          />
+        </div>
+      </Page>
+      
+      {/* Page 3: Third slide */}
+      <Page 
+        id="page-3"
+        isActive={currentPage === 2}
+        hasSparkles={true}
+        className="bg-gradient-3"
+      >
+        <div className="flex flex-col md:flex-row-reverse items-center justify-center gap-8">
+          <Photo 
+            src={photos[2]} 
+            alt="Birthday person" 
+            className="w-64 h-64"
+            animation="rotate"
+          />
+          <Message 
+            text={messages[2]}
+            animation="slide"
+            className="text-primary"
+          />
+        </div>
+      </Page>
+      
+      {/* Page 4: Grand finale */}
+      <Page 
+        id="page-4"
+        isActive={currentPage === 3}
+        hasConfetti={true}
+        className="bg-gradient-final"
+      >
+        <Fireworks active={currentPage === 3} count={15} />
+        <div className="flex flex-col items-center justify-center gap-8">
+          <h1 className="text-5xl md:text-7xl font-dancing font-bold text-accent-foreground animate-bounce-in">
+            Happy Birthday, {birthdayPerson}!
+          </h1>
+          
+          <div className="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            {photos.map((photo, index) => (
+              <Photo 
+                key={index}
+                src={photo} 
+                alt={`Photo ${index + 1}`} 
+                className="w-32 h-32 md:w-48 md:h-48"
+                animation="fade"
+              />
+            ))}
+          </div>
+          
+          <Message 
+            text="May all your wishes come true! 💫"
+            animation="fade"
+            delay={1000}
+            className="text-accent-foreground mt-8"
+          />
+          
+          <Button 
+            onClick={() => setCurrentPage(0)}
+            className="animate-fade-in mt-8"
+            style={{ animationDelay: '1.5s' }}
+          >
+            Replay
+          </Button>
+        </div>
+      </Page>
+      
+      <Navigation 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
     </div>
+  );
+};
+
+// Custom reusable button component
+const Button = ({ 
+  onClick, 
+  children, 
+  className, 
+  ...props 
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-6 py-3 bg-primary text-white rounded-full font-medium transition-all hover:scale-105 hover:shadow-lg ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
   );
 };
 
