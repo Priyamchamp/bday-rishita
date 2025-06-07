@@ -9,15 +9,15 @@ import Fireworks from "@/components/Fireworks";
 const photos = [
   "/IMG-20250606-WA0004.jpg",
   "/IMG-20250606-WA0005.jpg",
-  "/IMG-20250606-WA0006.jpg",
+  "/IMG_20250607_214741.jpg",
   "/IMG-20250606-WA0007.jpg",
 ];
 
 const messages = [
-  "To the Most Amazing Rishita! 🎉",
-  "Your smile lights up every room ✨",
-  "Wishing you endless joy and laughter 🎈",
-  "Happy Birthday Beautiful! 🎂",
+  "To the Star of the Day!",
+  "tu bhi glow kar rahi hogi",
+  "Tera naam hi smile laata hai aur teri yaad toh alarm se pehle jagaa deti hai ",
+  "Happy Birthday! to the one jiske bina meri late night chats adhoori lagti hai! 🎂",
 ];
 
 // Update the name of the birthday person here
@@ -45,16 +45,13 @@ const Index = () => {
       if (currentPage < totalPages - 1) {
         setCurrentPage(p => p + 1);
       }
-    }, 10000); // Changed to 10 seconds for better viewing experience
+    }, 8000); // Change page every 8 seconds
     
     return () => clearTimeout(timer);
   }, [currentPage]);
   
   return (
     <div className="relative overflow-hidden min-h-screen">
-      <div className="fixed top-4 left-4 z-50 text-accent-foreground font-dancing text-2xl animate-fade-in">
-        Rishita's Special Day 🎂
-      </div>
       {/* Page 1: Opening */}
       <Page 
         id="page-1"
