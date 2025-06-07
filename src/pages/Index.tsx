@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Page from "@/components/Page";
 import Photo from "@/components/Photo";
@@ -8,10 +7,10 @@ import Fireworks from "@/components/Fireworks";
 
 // Sample photos - you can replace these with actual photos of the birthday person
 const photos = [
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
+  "/IMG-20250606-WA0004.jpg",
+  "/IMG-20250606-WA0005.jpg",
+  "/IMG_20250607_214741.jpg",
+  "/IMG-20250606-WA0007.jpg",
 ];
 
 const messages = [
@@ -22,7 +21,7 @@ const messages = [
 ];
 
 // Update the name of the birthday person here
-const birthdayPerson = "Sarah";
+const birthdayPerson = "Rishita";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -64,7 +63,7 @@ const Index = () => {
           <Photo 
             src={photos[0]} 
             alt="Birthday person" 
-            className="w-64 h-64 md:w-96 md:h-96"
+            className="w-80 h-80 md:w-[500px] md:h-[500px]"
             animation="zoom"
           />
           <Message 
@@ -87,7 +86,7 @@ const Index = () => {
           <Photo 
             src={photos[1]} 
             alt="Birthday person" 
-            className="w-64 h-64"
+            className="w-80 h-80 md:w-[500px] md:h-[500px]"
             animation="slide"
           />
           <Message 
@@ -109,7 +108,7 @@ const Index = () => {
           <Photo 
             src={photos[2]} 
             alt="Birthday person" 
-            className="w-64 h-64"
+            className="w-80 h-80 md:w-[500px] md:h-[500px]"
             animation="rotate"
           />
           <Message 
@@ -139,7 +138,7 @@ const Index = () => {
                 key={index}
                 src={photo} 
                 alt={`Photo ${index + 1}`} 
-                className="w-32 h-32 md:w-48 md:h-48"
+                className="w-48 h-48 md:w-64 md:h-64"
                 animation="fade"
               />
             ))}
